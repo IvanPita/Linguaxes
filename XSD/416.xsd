@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="dominio" type="tipoDominio"></xs:element>
+    
+    <xs:simpleType name="tipoDominio">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-z]{1,}[-]*[1-9]*[a-z]{1,}.[a-z]{2,3}"/>
+    </xs:restriction>
+</xs:simpleType>
+</xs:schema>

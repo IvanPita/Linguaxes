@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="vehiculos">
+        <xs:complexType>
+            <xs:element name="vehiculo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="nombre" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+                        <xs:element name="modelo" type="xs:string"/>
+                        <xs:element name="fabricacion">
+                            <xs:complextype>
+                                <xs:element name="inicio"/>
+                                    <xs:complextype>
+                                        <xs:sequence>
+                                            <xs:element name="dia" type="tipoDia"/>
+                                            <xs:element name="mes" type="tipoMes"/>
+                                            <xs:element name="anyo" type="tipoAnyo"/>
+                                        </xs:sequence>
+                                    </xs:complextype>
+                                <xs:element name="fin">
+                                    <xs:complextype>
+                                        <xs:sequence>
+                                            <xs:element name="dia" type="tipoDia"/>
+                                            <xs:element name="mes" type="tipoMes"/>
+                                            <xs:element name="anyo" type="tipoAnyo"/>
+                                        </xs:sequence>
+                                    </xs:complextype>
+                                </xs:element>
+                            </xs:complextype>
+                        </xs:element>
+                            <xs:element name="modificaciones">
+                                    <xs:complextype>
+                                        <xs:sequence>
+                                            <xs:element name="modificacion" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+                                        </xs:sequence>
+                                    </xs:complextype>
+                                </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:complexType>
+    </xs:element>
+    
+<xs:simpleType name="tipoDia">
+    <xs:restriction base="xs:integer">
+        <xs:minInclusive value="01"/>
+        <xs:maxInclusive value="31"/>
+    </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="tipoMes">
+    <xs:restriction base="xs:integer">
+        <xs:minInclusive value="01"/>
+        <xs:maxInclusive value="12"/>
+    </xs:restriction>
+</xs:simpleType>
+    
+    <xs:simpleType name="tipoAnyo">
+    <xs:restriction base="xs:integer">
+        <xs:minInclusive value="1900"/>
+        <xs:maxInclusive value="2099"/>
+    </xs:restriction>
+</xs:simpleType>
+    
+</xs:schema>
