@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE equipos_de_baloncesto [
+<!ELEMENT equipos_de_baloncesto (equipo)+>
+<!ELEMENT equipo (nombre,ciudad,entrenador,jugadores)>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT ciudad (#PCDATA)>
+<!ELEMENT entrenador (#PCDATA)>
+<!ELEMENT jugadores (nombre,nacionalidad)>
+<!ATTLIST jugadores posicion (Base|Escolta|Alero|Pivot) #REQUIRED>
+<!ELEMENT posicion (Base|Escolta|Alero|Pivot)>
+<!ELEMENT nacionalidad (#PCDATA)>
+]>
+
+<equipos_de_baloncesto>
+    <equipo>
+        <nombre></nombre>
+        <ciudad></ciudad>
+        <entrenador></entrenador>
+        <jugadores posicion="Alero">
+            <nombre></nombre>
+            <nacionalidad></nacionalidad>
+        </jugadores>
+    </equipo>
+    <equipo>
+        <nombre></nombre>
+        <ciudad></ciudad>
+        <entrenador></entrenador>
+        <jugadores posicion="Base">
+            <nombre></nombre>
+            <nacionalidad></nacionalidad>
+        </jugadores>
+    </equipo>
+</equipos_de_baloncesto>

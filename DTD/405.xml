@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE paneles [
+<!ELEMENT paneles (evento)+>
+<!ELEMENT evento (via,pk,retencion,sentido,carrilescortados?)>
+<!ATTLIST evento tipo CDATA #REQUIRED>
+<!ATTLIST evento fecha CDATA #IMPLIED>
+<!ELEMENT via (nombre,ref,origen,destino,(doble|sentido),carriles)>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT ref (#PCDATA)>
+<!ELEMENT origen (#PCDATA)>
+<!ELEMENT destino (#PCDATA)>
+<!ELEMENT doble (EMPY)>
+<!ELEMENT sentido (#PCDATA)>
+<!ELEMENT carriles (#PCDATA)>
+<!ELEMENT pk (#PCDATA)>
+<!ELEMENT retencion ANY>
+<!ATTLIST retencion long CDATA #REQUIRED>
+<!ELEMENT carrilescortados (#PCDATA)>
+<!ATTLIST carrilescortados valor (1|2|3|4) #REQUIRED>
+]>
+
+<paneles>
+    <evento tipo="" fecha="">
+        <via>
+            <nombre></nombre>
+            <ref></ref>
+            <origen></origen>
+            <destino></destino>
+            <sentido></sentido>
+            <carriles></carriles>
+        </via>
+        <pk></pk>
+        <retencion long=""></retencion>
+        <sentido>norte</sentido>
+        <carrilescortados valor ="2"></carrilescortados>
+    </evento>
+</paneles>
