@@ -1,0 +1,90 @@
+Escribe las consultas XQuery que permitan obtener la siguiente información:
+1. Una lista que contiene, para cada receta, el elemento <titulo> de la receta y un elemento <calorias> que contenga el número de calorías.
+
+#No muestra las calorias
+<ul>
+{
+  for $receta in /recetas/receta
+  return <li><titulo>{$receta/titulo/text()}</titulo><calorias>{$receta/nutricion/@caloria/text()}</calorias></li>
+}
+</ul>
+
+
+2. Una lista similar a la primera, ordenada según las calorías.
+
+#No muestra las calorias
+<ul>
+{
+  for $receta in /recetas/receta
+  order by $receta/nutricion/@calorias
+  return <li><titulo>{$receta/titulo/text()}</titulo><calorias>{$receta/nutricion/@caloria/text()}</calorias></li>
+  
+}
+</ul>
+
+
+3. Una lista similar a la primera, ordenada alfabéticamente según el título.
+
+#No muestra las calorias
+<ul>
+{
+  for $receta in /recetas/receta
+  order by $receta/titulo
+  return <li><titulo>{$receta/titulo/text()}</titulo><calorias>{$receta/nutricion/@caloria/text()}</calorias></li>
+  
+}
+</ul>
+
+
+4. Una lista similar a la primera, ordenada según el contenido de grasa.
+
+#No muestra las calorias
+<ul>
+{
+  for $receta in /recetas/receta
+  order by $receta/nutricion/@grasa
+  return <li><titulo>{$receta/titulo/text()}</titulo><calorias>{$receta/nutricion/@caloria/text()}</calorias></li>
+}
+</ul>
+
+5. Una lista similar a la primera, con el título como atributo y las calorías como contenido.
+
+#No muestra las calorias
+<ul>
+{
+  for $receta in /recetas/receta
+  return <li titulo="{$receta/titulo/text()}">
+  <calorias>{$receta/nutricion/@caloria/text()}</calorias>
+  </li>
+}
+</ul>
+
+6. Una lista que contenga para cada receta, el título como atributo y cada uno de los ingredientes de nivel superior (sin añadir los ingredientes que están dentro de otros ingredientes).
+
+#Falta filtrar los ingredientes
+<ul>
+{
+  for $receta in /recetas/receta
+  return <li titulo="{$receta/titulo/text()}">
+  <ingredientes>{$receta/ingrediente}</ingredientes>
+  </li>
+}
+</ul>
+
+7. Una lista con cada una de las recetas que contengan el ingrediente harina. Poner el título de la receta como atributo del elemento receta.
+
+#No muestra nada
+<ul>
+{
+  for $receta in /recetas/receta
+  where $receta/ingrediente="harina" and count($receta/ingrediente)>1
+  return <li>
+  <receta titulo="{$receta/titulo}"></receta>
+  </li>
+}
+</ul>
+
+8. Una lista de todas aquellas recetas que tengan un ingrediente llamado relleno y este contenga en su interior más de 5 elementos ingrediente. 
+* La lista resultante estará formada por elementos receta que contienen un atributo titulo con el valor del elemento titulo de la receta. 
+* Además, dentro de cada elemento receta habrá elementos ingrediente con el nombre de cada uno de los ingredientes.
+

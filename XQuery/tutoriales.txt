@@ -1,0 +1,79 @@
+Escribe las consultas XQuery que permitan obtener la siguiente información:
+1. cada uno de los nombres de las categorias con la etiqueta "categoria".
+
+for $tutorial in distinct-values(/tutoriales/tutorial)
+return $tutorial
+
+2. los titulos de los tutoriales con el número de visitas entre paréntesis, ambos dentro de la misma etiqueta "lostutoriales".
+
+<lostutoriales>{
+    for $tutorial in //tutorial
+    return <tutorial>{$tutorial/titulo} ({data($tutorial/visitas)})</tutorial>
+}</lostutoriales>
+
+3. los nombres de los tutoriales con menos de 2000 visitas
+
+for $tutorial in /tutoriales/tutorial
+where number(visitas) < 2000
+return $tutorial
+
+4. los nombres de los tutoriales de XML con más de 30.000 visitas
+
+for $tutorial in /tutoriales/tutorial
+where[categoria = 'XML' and number(visitas) > 30000]
+return $tutorial
+
+5. el número total de visitas
+
+for $tutorial in /tutoriales/tutorial
+return sum($tutorial/visitas)
+
+6. los nombres de las categorías distintas, cada una en una etiqueta <categoriadistintas>
+
+for $tutorial in distinct-values(/tutoriales/tutorial)
+return <categoriadistintas>{$tutorial/categoria}</categoriadistintas>
+
+7. nombres y apellidos de los autores eliminando los repetidos y acompañar cada nombre con todos sus tutoriales, ordenados alfabeticametne por nombre de autor; cada autor en una etiqueta <autor> que contendrá una etiqueta <nombreyapellidos> y una etiqueta <titulo>.
+
+for $autor in distinct-values(/tutoriales/tutorial/autor)
+let $nombre := $autor/nombre
+let $apellidos := $autor/apellidos
+let $tutoriales := //tutorial[autor[nombre = $nombre and apellidos = $apellidos]]
+order by $nombre, $apellidos
+return <autor><nombreyapellidos>{$nombre} {$apellidos}</nombreyapellidos>{for $tutorial in $tutoriales return <titulo>{$tutorial/titulo}</titulo>}</autor>
+
+8. la media de vistas de los tutoriales, dentro de una etiqueta <media>.
+
+let $contar := count(/tutoriales/tutorial)
+let $sum := sum(/tutoriales/tutorial/visitas)
+return <media>{$sum div $total}</media>
+
+
+9. cuantos tutoriales de XML hay, dentro de una etiqueta <totaltutoriales>.
+
+let $contar := count(/tutoriales/tutorial[categoria = 'XML'])
+return <totaltutoriales>{$total}</totaltutoriales>
+
+10. el nombre del tutorial y su categoría, ordenado por el nombre de cada categoría
+
+for $tutorial in /tutoriales/tutorial
+let $categoria := /tutoriales/tutorial/categoria
+order by $categoria
+return <tutorial><titulo>{$tutorial/titulo}</titulo><categoria>{$categoria}</categoria></tutorial>
+
+11. todos los datos de cada tutorial excepto las visitas.
+
+for $tutorial in //tutorial
+return <tutorial>{$tutorial/(titulo, autor, categoria)}</tutorial>
+
+12. En una tabla de HTML de dos columnas, el título de los tutoriales y los nombres de los autores.
+
+<table>{
+for $tutorial in /tutoriales/tutorial
+return 
+<tr>
+<td>{$tutorial/titulo}</td>
+<td>{string-join($tutorial/autor/(nombre, apellidos))}</td>
+</tr>
+}</table>
+
